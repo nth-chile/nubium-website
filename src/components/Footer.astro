@@ -1,0 +1,19 @@
+---
+const links = [
+  { href: '/download', label: 'Download' },
+  { href: '/community', label: 'Community' },
+  { href: 'https://github.com/nth-chile/nubium', label: 'GitHub' },
+];
+---
+
+<footer class="border-t border-[var(--color-border)] mt-32">
+  <div class="mx-auto max-w-6xl px-6 py-12">
+    <nav class="flex items-center justify-center gap-6">
+      {links.map(link => (
+        <a href={link.href} class="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors no-underline">
+          {link.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</footer>

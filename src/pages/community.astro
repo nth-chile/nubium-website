@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+
+---
+
+<Layout title="Community — Nubium">
+  <Nav />
+
+  <section class="pt-32 pb-20 px-6">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Community</h1>
+      <p class="mt-4 text-[var(--color-text-muted)] text-lg">
+        Nubium is built in the open. Come say hi.
+      </p>
+
+      <div class="mt-16 grid sm:grid-cols-2 gap-8 text-left">
+        <a href="https://github.com/nth-chile/nubium" class="p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] hover:border-[var(--color-text-muted)] transition-colors no-underline group">
+          <h3 class="text-xl font-semibold group-hover:text-[var(--color-accent)] transition-colors">GitHub</h3>
+          <p class="mt-2 text-sm text-[var(--color-text-muted)]">
+            Source code, issues, and roadmap. Star the repo to follow along.
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
