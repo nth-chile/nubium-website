@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+
+---
+
+<Layout title="Roadmap — Nubium" description="See what's planned for Nubium. Roadmap items are pulled live from GitHub issues.">
+  <Nav />
+
+  <section class="pt-32 pb-20 px-6">
+    <div class="mx-auto max-w-3xl">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Roadmap</h1>
+        <p class="mt-4 text-[var(--color-text-muted)] text-lg max-w-xl mx-auto">
+          A look at some of what's coming to Nubium. This isn't everything — just the highlights.
+        </p>
+      </div>
+
+      <!-- Loading state -->
+      <div id="loading" class="mt-16 text-center text-[var(--color-text-muted)]">
+        Loading roadmap…
+      </div>
+
+      <!-- Error state -->
+      <div id="error" class="mt-16 text-center hidden">
+        <p class="text-[var(--color-text-muted)]">
+          Couldn't load roadmap items.
+          <a href="https://github.com/nth-chile/nubium/labels/roadmap" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">View on GitHub →</a>
+        </p>
+      </div>
+
+      <!-- Empty state -->
+      <div id="empty" class="mt-16 text-center hidden">
+        <p class="text-[var(--color-text-muted)]">
+          No roadmap items yet. Check back soon!
+        </p>
+      </div>
+
+      <!-- Roadmap items -->
+      <div id="roadmap" class="mt-16 space-y-3 hidden">
+      </div>
+
+      <div class="mt-16 mx-auto max-w-md">
+        <h2 class="text-lg font-semibold text-center mb-4">Want to see something else?</h2>
+        <form action="https://formspree.io/f/xgopavpe" method="POST" class="space-y-3" id="suggest-form">
+          <textarea name="message" required rows="3" placeholder="Tell us what you'd like Nubium to do…" class="w-full px-4 py-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-[var(--color-text)] placeholder-[var(--color-text-muted)] resize-none focus:outline-none focus:border-[var(--color-accent)] transition-colors text-sm"></textarea>
+          <button type="submit" class="w-full px-4 py-2.5 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-medium text-sm transition-colors cursor-pointer">Send suggestion</button>
+        </form>
+        <p id="suggest-thanks" class="text-center text-sm text-[var(--color-text-muted)] hidden">Thanks! We'll take a look.</p>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<script>
+  const REPO = 'nth-chile/nubium';
+  const LABEL = 'roadmap';
+
+  interface GHLabel {
+    name: string;
+    color: string;
+  }
+
+  interface GHIssue {
+    number: number;
+    title: string;
+    html_url: string;
+    state: string;
+    labels: GHLabel[];
+    created_at: string;
+  }
+
+  function createCard(issue: GHIssue): HTMLElement {
+    const card = document.createElement('a');
+    card.href = issue.html_url;
+    card.target = '_blank';
+    card.rel = 'noopener';
+    card.className =
+      'block p-4 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] hover:border-[var(--color-text-muted)] transition-colors no-underline group';
+
+    const title = document.createElement('p');
+    title.className = 'font-medium group-hover:text-[var(--color-accent)] transition-colors';
+    title.textContent = issue.title;
+    card.appendChild(title);
+
+    // Show extra labels (excluding "roadmap")
+    const extraLabels = issue.labels.filter(l => l.name.toLowerCase() !== LABEL);
+    if (extraLabels.length) {
+      const labelsRow = document.createElement('div');
+      labelsRow.className = 'mt-2 flex flex-wrap gap-1.5';
+      for (const label of extraLabels) {
+        const badge = document.createElement('span');
+        badge.className = 'text-xs px-2 py-0.5 rounded-full';
+        badge.style.backgroundColor = `#${label.color}20`;
+        badge.style.color = `#${label.color}`;
+        badge.style.border = `1px solid #${label.color}40`;
+        badge.textContent = label.name;
+        labelsRow.appendChild(badge);
+      }
+      card.appendChild(labelsRow);
+    }
+
+    const meta = document.createElement('p');
+    meta.className = 'mt-2 text-xs text-[var(--color-text-muted)]';
+    meta.textContent = `#${issue.number}`;
+    card.appendChild(meta);
+
+    return card;
+  }
+
+  async function loadRoadmap() {
+    const loadingEl = document.getElementById('loading')!;
+    const errorEl = document.getElementById('error')!;
+    const emptyEl = document.getElementById('empty')!;
+    const roadmapEl = document.getElementById('roadmap')!;
+
+    try {
+      const res = await fetch(`https://api.github.com/repos/${REPO}/issues?labels=${LABEL}&state=open&per_page=100&sort=created&direction=asc`);
+      if (!res.ok) throw new Error('API error');
+
+      const issues: GHIssue[] = await res.json();
+
+      loadingEl.classList.add('hidden');
+
+      if (issues.length === 0) {
+        emptyEl.classList.remove('hidden');
+        return;
+      }
+
+      roadmapEl.classList.remove('hidden');
+
+      for (const issue of issues) {
+        roadmapEl.appendChild(createCard(issue));
+      }
+    } catch {
+      loadingEl.classList.add('hidden');
+      errorEl.classList.remove('hidden');
+    }
+  }
+
+  loadRoadmap();
+
+  const form = document.getElementById('suggest-form') as HTMLFormElement;
+  const thanks = document.getElementById('suggest-thanks')!;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+      form.classList.add('hidden');
+      thanks.classList.remove('hidden');
+    } catch {
+      // Fall back to native form submission
+      form.submit();
+    }
+  });
+</script>
