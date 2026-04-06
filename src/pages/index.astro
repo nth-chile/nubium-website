@@ -18,11 +18,11 @@ import Nav from '../components/Nav.astro';
         Free, fast notation software that stays out of your way. Open formats, extensible with plugins, runs on your machine.
       </p>
       <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6">
-        <a href="/download" id="hero-download" class="px-8 py-3.5 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold text-lg transition-colors no-underline">
-          Get Nubium
+        <a href="https://app.nubium.rocks" class="px-8 py-3.5 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold text-lg transition-colors no-underline">
+          Try in Browser
         </a>
-        <a href="/download" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] font-medium text-lg transition-colors no-underline">
-          More platforms
+        <a href="/download" id="hero-download" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] font-medium text-lg transition-colors no-underline">
+          Download for desktop
         </a>
       </div>
     </div>
@@ -122,9 +122,14 @@ import Nav from '../components/Nav.astro';
       <p class="mt-4 text-[var(--color-text-muted)] text-lg">
         Nubium is free. No account, no trial, no strings.
       </p>
-      <a href="/download" id="cta-download" class="inline-block mt-8 px-8 py-3.5 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold text-lg transition-colors no-underline">
-        Get Nubium
-      </a>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6">
+        <a href="https://app.nubium.rocks" class="px-8 py-3.5 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold text-lg transition-colors no-underline">
+          Try in Browser
+        </a>
+        <a href="/download" id="cta-download" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] font-medium text-lg transition-colors no-underline">
+          Download for desktop
+        </a>
+      </div>
     </div>
   </section>
 
@@ -149,15 +154,57 @@ import Nav from '../components/Nav.astro';
 </Layout>
 
 <script>
-  const platform = navigator.platform.toLowerCase();
-  let os = '';
-  if (platform.includes('mac')) os = 'macOS';
-  else if (platform.includes('win')) os = 'Windows';
-  else if (platform.includes('linux')) os = 'Linux';
+  const REPO = 'nth-chile/nubium';
 
+  function detectPlatform(): { os: string; asset: string } {
+    const ua = navigator.userAgent.toLowerCase();
+    const plat = (navigator as any).userAgentData?.platform?.toLowerCase() ?? navigator.platform?.toLowerCase() ?? '';
+
+    if (plat.includes('mac') || ua.includes('macintosh')) {
+      try {
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl');
+        if (gl) {
+          const ext = gl.getExtension('WEBGL_debug_renderer_info');
+          if (ext) {
+            const renderer = gl.getParameter(ext.UNMASKED_RENDERER_WEBGL);
+            if (renderer && renderer.includes('Apple')) {
+              return { os: 'macOS', asset: 'aarch64.dmg' };
+            }
+          }
+        }
+      } catch {}
+      return { os: 'macOS', asset: 'x64.dmg' };
+    }
+    if (plat.includes('win') || ua.includes('windows')) return { os: 'Windows', asset: 'x64-setup.exe' };
+    if (plat.includes('linux') || ua.includes('linux')) return { os: 'Linux', asset: '.AppImage' };
+    return { os: '', asset: '' };
+  }
+
+  const { os, asset } = detectPlatform();
+
+  // Update button text
   if (os) {
     document.querySelectorAll('#hero-download, #cta-download').forEach(el => {
       el.textContent = `Get Nubium for ${os}`;
     });
+  }
+
+  // Resolve direct download URL from GitHub Releases
+  if (asset) {
+    fetch(`https://api.github.com/repos/${REPO}/releases/latest`)
+      .then(r => r.ok ? r.json() : null)
+      .then(release => {
+        if (!release) return;
+        const match = release.assets.find((a: any) =>
+          a.name.includes(asset) && !a.name.endsWith('.sig') && !a.name.endsWith('.json')
+        );
+        if (match) {
+          document.querySelectorAll<HTMLAnchorElement>('#hero-download, #cta-download').forEach(el => {
+            el.href = match.browser_download_url;
+          });
+        }
+      })
+      .catch(() => {});
   }
 </script>

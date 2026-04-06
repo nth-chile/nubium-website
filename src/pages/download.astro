@@ -14,12 +14,16 @@ import Nav from '../components/Nav.astro';
         Free. No account required.
       </p>
 
-      <!-- Primary download (OS-detected later via JS) -->
+      <!-- Primary download (OS-detected, starts download immediately) -->
       <div class="mt-12 p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] inline-block">
-        <p class="text-sm text-[var(--color-text-muted)] mb-4" id="detected-os">Available for macOS, Windows, and Linux</p>
+        <p class="text-sm text-[var(--color-text-muted)] mb-4" id="detected-os">Detecting your platform…</p>
         <a href="#" class="inline-block px-8 py-3.5 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold text-lg transition-colors no-underline" id="primary-download">
           Download
         </a>
+        <p class="mt-3 text-xs text-[var(--color-text-muted)]" id="version-info"></p>
+        <p class="mt-4">
+          <a href="https://app.nubium.rocks" class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">or try in your browser →</a>
+        </p>
       </div>
 
       <!-- All platforms -->
@@ -27,22 +31,22 @@ import Nav from '../components/Nav.astro';
         <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
           <h3 class="font-semibold mb-3">macOS</h3>
           <div class="space-y-2">
-            <a href="#" class="block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">Apple Silicon (.dmg)</a>
-            <a href="#" class="block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">Intel (.dmg)</a>
+            <a href="#" data-asset="aarch64.dmg" class="download-link block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">Apple Silicon (.dmg)</a>
+            <a href="#" data-asset="x64.dmg" class="download-link block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">Intel (.dmg)</a>
           </div>
         </div>
         <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
           <h3 class="font-semibold mb-3">Windows</h3>
           <div class="space-y-2">
-            <a href="#" class="block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">64-bit (.msi)</a>
-            <a href="#" class="block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">ARM64 (.msi)</a>
+            <a href="#" data-asset="x64-setup.exe" class="download-link block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">64-bit (.exe)</a>
+            <a href="#" data-asset="x64_en-US.msi" class="download-link block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">64-bit (.msi)</a>
           </div>
         </div>
         <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
           <h3 class="font-semibold mb-3">Linux</h3>
           <div class="space-y-2">
-            <a href="#" class="block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">AppImage</a>
-            <a href="#" class="block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">.deb (Debian/Ubuntu)</a>
+            <a href="#" data-asset=".AppImage" class="download-link block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">AppImage</a>
+            <a href="#" data-asset="_amd64.deb" class="download-link block text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">.deb (Debian/Ubuntu)</a>
           </div>
         </div>
       </div>
@@ -53,17 +57,111 @@ import Nav from '../components/Nav.astro';
 </Layout>
 
 <script>
-  const os = navigator.platform.toLowerCase();
-  const el = document.getElementById('detected-os');
-  const btn = document.getElementById('primary-download') as HTMLAnchorElement;
-  if (os.includes('mac')) {
-    if (el) el.textContent = 'Detected: macOS';
-    if (btn) btn.textContent = 'Download for macOS';
-  } else if (os.includes('win')) {
-    if (el) el.textContent = 'Detected: Windows';
-    if (btn) btn.textContent = 'Download for Windows';
-  } else if (os.includes('linux')) {
-    if (el) el.textContent = 'Detected: Linux';
-    if (btn) btn.textContent = 'Download for Linux';
+  const REPO = 'nth-chile/nubium';
+
+  interface GHAsset {
+    name: string;
+    browser_download_url: string;
   }
+
+  interface GHRelease {
+    tag_name: string;
+    assets: GHAsset[];
+  }
+
+  function detectPlatform(): { os: string; asset: string } {
+    const ua = navigator.userAgent.toLowerCase();
+    const platform = (navigator as any).userAgentData?.platform?.toLowerCase() ?? navigator.platform?.toLowerCase() ?? '';
+
+    if (platform.includes('mac') || ua.includes('macintosh')) {
+      // Detect Apple Silicon vs Intel
+      // WebGL renderer trick: Apple GPU = Apple Silicon
+      try {
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl');
+        if (gl) {
+          const ext = gl.getExtension('WEBGL_debug_renderer_info');
+          if (ext) {
+            const renderer = gl.getParameter(ext.UNMASKED_RENDERER_WEBGL);
+            if (renderer && renderer.includes('Apple')) {
+              return { os: 'macOS (Apple Silicon)', asset: 'aarch64.dmg' };
+            }
+          }
+        }
+      } catch {}
+      return { os: 'macOS (Intel)', asset: 'x64.dmg' };
+    }
+
+    if (platform.includes('win') || ua.includes('windows')) {
+      return { os: 'Windows', asset: 'x64-setup.exe' };
+    }
+
+    if (platform.includes('linux') || ua.includes('linux')) {
+      return { os: 'Linux', asset: '.AppImage' };
+    }
+
+    return { os: '', asset: '' };
+  }
+
+  function findAsset(assets: GHAsset[], pattern: string): GHAsset | undefined {
+    return assets.find(a =>
+      a.name.includes(pattern) &&
+      !a.name.endsWith('.sig') &&
+      !a.name.endsWith('.json')
+    );
+  }
+
+  async function init() {
+    const detected = detectPlatform();
+    const detectedEl = document.getElementById('detected-os');
+    const btn = document.getElementById('primary-download') as HTMLAnchorElement;
+    const versionEl = document.getElementById('version-info');
+
+    if (detected.os && detectedEl) {
+      detectedEl.textContent = `Detected: ${detected.os}`;
+    } else if (detectedEl) {
+      detectedEl.textContent = 'Available for macOS, Windows, and Linux';
+    }
+
+    if (detected.os && btn) {
+      const osShort = detected.os.split(' (')[0];
+      btn.textContent = `Download for ${osShort}`;
+    }
+
+    // Fetch latest release and wire up all links
+    try {
+      const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`);
+      if (!res.ok) return;
+      const release: GHRelease = await res.json();
+
+      if (versionEl) {
+        versionEl.textContent = release.tag_name;
+      }
+
+      // Wire primary button
+      if (detected.asset && btn) {
+        const asset = findAsset(release.assets, detected.asset);
+        if (asset) {
+          btn.href = asset.browser_download_url;
+        }
+      }
+
+      // Wire all platform links
+      document.querySelectorAll<HTMLAnchorElement>('.download-link').forEach(link => {
+        const pattern = link.dataset.asset;
+        if (!pattern) return;
+        const asset = findAsset(release.assets, pattern);
+        if (asset) {
+          link.href = asset.browser_download_url;
+        } else {
+          link.classList.add('opacity-40', 'pointer-events-none');
+          link.textContent += ' (coming soon)';
+        }
+      });
+    } catch {
+      // API failed — links stay as # (non-functional but page still renders)
+    }
+  }
+
+  init();
 </script>
