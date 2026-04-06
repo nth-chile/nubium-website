@@ -253,6 +253,7 @@ import Nav from '../components/Nav.astro';
           <p><kbd>Ctrl+K</kbd> — <strong>Key signature.</strong> Set the key for the current measure and beyond.</p>
           <p><kbd>Shift+R</kbd> — <strong>Rehearsal mark.</strong> Add a label (A, B, Intro, Verse, etc.).</p>
           <p><kbd>Shift+S</kbd> — <strong>Slur.</strong> Press once to start, again to end.</p>
+          <p><kbd>Shift+N</kbd> — <strong>Navigation marks.</strong> Segno, coda, D.S., D.C., volta brackets.</p>
         </div>
       </article>
 
@@ -286,15 +287,16 @@ import Nav from '../components/Nav.astro';
         <h2 class="text-2xl font-bold mb-4">Repeats &amp; navigation marks</h2>
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
           <p>Set repeat barlines with <kbd>Shift+B</kbd>: repeat start, repeat end, or both.</p>
-          <p>The score model supports navigation marks (UI for adding these is coming soon):</p>
+          <p>Open the navigation marks popover with <kbd>Shift+N</kbd> to add:</p>
           <ul class="list-disc list-inside ml-4 space-y-1">
             <li><strong>Segno</strong> — marks a jump-to point</li>
-            <li><strong>Coda</strong> — marks the coda section</li>
+            <li><strong>Coda</strong> / <strong>To Coda</strong> — marks the coda section and jump</li>
             <li><strong>Fine</strong> — marks the end point for D.C.</li>
-            <li><strong>D.S. al Coda</strong> — play from Segno, then jump to Coda</li>
-            <li><strong>D.C. al Fine</strong> — play from beginning, stop at Fine</li>
+            <li><strong>D.S. al Coda</strong> / <strong>D.S. al Fine</strong> — play from Segno</li>
+            <li><strong>D.C. al Fine</strong> / <strong>D.C. al Coda</strong> — play from beginning</li>
+            <li><strong>Volta brackets</strong> — 1st/2nd/3rd endings with repeat</li>
           </ul>
-          <p><strong>Volta brackets</strong> (1st/2nd endings) are also supported — set them via the Command Palette.</p>
+          <p>Playback follows all navigation marks automatically.</p>
         </div>
       </article>
 
@@ -323,6 +325,7 @@ import Nav from '../components/Nav.astro';
           <p><kbd>Shift+M</kbd> — Toggle the metronome.</p>
           <p>Set the tempo in the BPM field in the toolbar (20–400 BPM).</p>
           <p>Playback uses SoundFont instruments for realistic sound. It follows repeats, D.S., D.C., codas, and volta brackets.</p>
+          <p>Select measures first, then press <kbd>Space</kbd> to loop playback over just the selection.</p>
         </div>
         <h3 class="text-lg font-semibold mt-8 mb-3">Swing &amp; feel</h3>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
@@ -429,7 +432,7 @@ import Nav from '../components/Nav.astro';
       <article id="plugins" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Plugins</h2>
         <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
-          Nubium's features are built as plugins. Toggle them on and off with <kbd>Ctrl+Shift+E</kbd>. Plugins can register commands, keyboard shortcuts, toolbar panels, and sidebar panels.
+          Nubium's features are built as plugins. Toggle them on and off with <kbd>Ctrl+Shift+E</kbd>. Plugins can register commands, keyboard shortcuts, toolbar panels, and sidebar panels. Browse and install community plugins from the <strong>Community</strong> tab in the plugins panel.
         </p>
 
         <h3 class="text-lg font-semibold mt-8 mb-2">AI Chat</h3>
@@ -442,7 +445,7 @@ import Nav from '../components/Nav.astro';
 
         <h3 class="text-lg font-semibold mt-8 mb-2">Clipboard</h3>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Copy and paste notation in multiple formats. <strong>MusicXML</strong> supports full copy and paste. <strong>ABC notation</strong> supports copy to clipboard and paste from clipboard. <strong>LilyPond</strong> is export only &mdash; you can copy your score as LilyPond, but pasting LilyPond back in is not yet supported.
+          Copy and paste notation in multiple formats. <strong>MusicXML</strong>, <strong>ABC notation</strong>, and <strong>LilyPond</strong> all support copy to clipboard and paste from clipboard. Use "Paste Notation" from the Command Palette to import from any of these formats.
         </p>
 
         <h3 class="text-lg font-semibold mt-8 mb-2">Export</h3>
@@ -563,7 +566,8 @@ import Nav from '../components/Nav.astro';
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+T</kbd></td><td class="py-2">Time signature</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+K</kbd></td><td class="py-2">Key signature</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+R</kbd></td><td class="py-2">Rehearsal mark</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>Shift+B</kbd></td><td class="py-2">Barline</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+B</kbd></td><td class="py-2">Barline</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>Shift+N</kbd></td><td class="py-2">Navigation marks</td></tr>
             </tbody>
           </table>
         </div>
