@@ -25,7 +25,7 @@ import Nav from '../components/Nav.astro';
       <div id="error" class="mt-16 text-center hidden">
         <p class="text-[var(--color-text-muted)]">
           Couldn't load roadmap items.
-          <a href="https://github.com/nth-chile/nubium/labels/roadmap" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">View on GitHub →</a>
+          <a href="https://github.com/nth-chile/nubium/labels/roadmap" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">View on GitHub →</a>
         </p>
       </div>
 
@@ -83,23 +83,6 @@ import Nav from '../components/Nav.astro';
     title.className = 'font-medium group-hover:text-[var(--color-accent)] transition-colors';
     title.textContent = issue.title;
     card.appendChild(title);
-
-    // Show extra labels (excluding "roadmap")
-    const extraLabels = issue.labels.filter(l => l.name.toLowerCase() !== LABEL);
-    if (extraLabels.length) {
-      const labelsRow = document.createElement('div');
-      labelsRow.className = 'mt-2 flex flex-wrap gap-1.5';
-      for (const label of extraLabels) {
-        const badge = document.createElement('span');
-        badge.className = 'text-xs px-2 py-0.5 rounded-full';
-        badge.style.backgroundColor = `#${label.color}20`;
-        badge.style.color = `#${label.color}`;
-        badge.style.border = `1px solid #${label.color}40`;
-        badge.textContent = label.name;
-        labelsRow.appendChild(badge);
-      }
-      card.appendChild(labelsRow);
-    }
 
     const meta = document.createElement('p');
     meta.className = 'mt-2 text-xs text-[var(--color-text-muted)]';

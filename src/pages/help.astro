@@ -136,14 +136,8 @@ import Nav from '../components/Nav.astro';
       <!-- Getting Started -->
       <article id="getting-started" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Getting started</h2>
-        <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
-          Nubium opens with a blank score ready for input. No account or setup required. The interface has a toolbar at the top, a notation canvas in the center, and collapsible sidebars on either side.
-        </p>
-        <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
-          Click on the title or composer text at the top of the score to edit them inline. Use the toolbar buttons or keyboard shortcuts to enter notes, change durations, and add annotations.
-        </p>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Open the <strong>Command Palette</strong> with <kbd>Ctrl+Shift+P</kbd> (or <kbd>Cmd+Shift+P</kbd> on Mac) to search for any command by name.
+          Open the <strong>Command Palette</strong> with <kbd>Ctrl+Shift+P</kbd> (or <kbd>Cmd+Shift+P</kbd> on Mac) to search for any command by name. Most features in Nubium are accessible from here.
         </p>
       </article>
 
@@ -153,10 +147,7 @@ import Nav from '../components/Nav.astro';
       <article id="note-input" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Note input</h2>
         <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
-          Type <kbd>A</kbd> through <kbd>G</kbd> to insert notes. Press <kbd>R</kbd> for a rest. Delete a note with <kbd>Backspace</kbd>.
-        </p>
-        <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
-          The cursor advances automatically when a measure is full (based on the current time signature). Click on a note to move the cursor to it. Double-click to select a note or measure.
+          Type <kbd>A</kbd> through <kbd>G</kbd> to insert notes. Press <kbd>R</kbd> for a rest.
         </p>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
           Adjust pitch after entering a note: <kbd>Alt+Up/Down</kbd> moves by diatonic step, <kbd>Shift+Alt+Up/Down</kbd> by chromatic step, and <kbd>Ctrl+Alt+Up/Down</kbd> by octave.
@@ -169,7 +160,7 @@ import Nav from '../components/Nav.astro';
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
           <p><strong>Step entry</strong> (<kbd>N</kbd>) — Insert notes one at a time. The cursor advances after each note.</p>
           <p><strong>Insert mode</strong> (<kbd>I</kbd>) — New notes push existing notes forward instead of overwriting them.</p>
-          <p><strong>Grace note mode</strong> (<kbd>Shift+G</kbd>) — Enter grace notes (small ornamental notes before the beat).</p>
+          <p><strong>Grace note mode</strong> (<kbd>Shift+G</kbd>) — Enter grace notes.</p>
           <p><strong>Pitch before duration</strong> (<kbd>K</kbd>) — Toggle whether you set the pitch or the duration first.</p>
         </div>
       </article>
@@ -196,7 +187,7 @@ import Nav from '../components/Nav.astro';
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>5</kbd></td><td class="py-2">16th note</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>6</kbd></td><td class="py-2">32nd note</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>7</kbd></td><td class="py-2">64th note</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>.</kbd></td><td class="py-2">Toggle dot (adds 50% to duration)</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>.</kbd></td><td class="py-2">Toggle dot</td></tr>
             </tbody>
           </table>
         </div>
@@ -206,7 +197,7 @@ import Nav from '../components/Nav.astro';
       <article id="accidentals" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Accidentals</h2>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Press <kbd>=</kbd> (or <kbd>+</kbd>) for sharp and <kbd>-</kbd> for flat. Accidentals are applied to the next note you enter or to the currently selected note.
+          Press <kbd>=</kbd> for sharp and <kbd>-</kbd> for flat. Accidentals are applied to the next note you enter or to the currently selected note.
         </p>
       </article>
 
@@ -233,9 +224,10 @@ import Nav from '../components/Nav.astro';
           <p><kbd>Shift+T</kbd> — Tenuto</p>
           <p><kbd>Shift+U</kbd> — Fermata</p>
           <p><kbd>Shift+^</kbd> — Marcato</p>
+          <p><kbd>Shift+Alt+R</kbd> — Trill</p>
         </div>
         <p class="text-[var(--color-text-muted)] leading-relaxed mt-4">
-          Additional articulations (trill, mordent, turn, up-bow, down-bow, harmonics, and more) are available via the Command Palette.
+          Additional articulations (mordent, turn, up-bow, down-bow, open string, stopped, and more) are available via the Command Palette.
         </p>
       </article>
 
@@ -246,13 +238,16 @@ import Nav from '../components/Nav.astro';
         <h2 class="text-2xl font-bold mb-4">Annotations</h2>
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
           <p><kbd>Shift+C</kbd> — <strong>Chord symbols.</strong> Type any chord (e.g., "Cmaj7", "Dm7b5/A") and press Enter to commit.</p>
-          <p><kbd>Shift+L</kbd> — <strong>Lyrics.</strong> Type syllables and press Enter to advance to the next note. Supports multiple verses.</p>
+          <p><kbd>Shift+L</kbd> — <strong>Lyrics.</strong></p>
           <p><kbd>Shift+D</kbd> — <strong>Dynamics.</strong> Choose from pp, p, mp, mf, f, ff, sfz, fp.</p>
           <p><kbd>Ctrl+Shift+T</kbd> — <strong>Tempo marking.</strong> Set BPM and optional text (Allegro, Presto, etc.).</p>
           <p><kbd>Ctrl+T</kbd> — <strong>Time signature.</strong> Change the time signature at the current measure.</p>
           <p><kbd>Ctrl+K</kbd> — <strong>Key signature.</strong> Set the key for the current measure and beyond.</p>
           <p><kbd>Shift+R</kbd> — <strong>Rehearsal mark.</strong> Add a label (A, B, Intro, Verse, etc.).</p>
           <p><kbd>Shift+S</kbd> — <strong>Slur.</strong> Press once to start, again to end.</p>
+          <p><kbd>T</kbd> — <strong>Tie.</strong> Toggle a tie on the current note.</p>
+          <p><kbd>Shift+Alt+,</kbd> — <strong>Crescendo.</strong> Press once to start, again to end.</p>
+          <p><kbd>Shift+Alt+.</kbd> — <strong>Diminuendo.</strong> Press once to start, again to end.</p>
           <p><kbd>Shift+N</kbd> — <strong>Navigation marks.</strong> Segno, coda, D.S., D.C., volta brackets.</p>
         </div>
       </article>
@@ -261,8 +256,8 @@ import Nav from '../components/Nav.astro';
       <article id="measures" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Measures &amp; barlines</h2>
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
-          <p><kbd>Ctrl+M</kbd> — Insert a new measure after the current one. It inherits the time and key signature.</p>
-          <p><kbd>Ctrl+Backspace</kbd> — Delete the current measure (cannot delete the last remaining measure).</p>
+          <p><kbd>Ctrl+M</kbd> — Insert a new measure after the current one.</p>
+          <p><kbd>Ctrl+Backspace</kbd> — Delete the current measure.</p>
           <p><kbd>Shift+B</kbd> — Set barline type: single, double, final, repeat start, repeat end, or repeat both.</p>
           <p>Use the Command Palette to toggle a measure as a <strong>pickup</strong> (anacrusis).</p>
         </div>
@@ -274,11 +269,8 @@ import Nav from '../components/Nav.astro';
         <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
           Manage parts in the left sidebar. You can add, remove, reorder (drag), solo, mute, and hide parts.
         </p>
-        <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
-          Nubium includes 12 built-in instruments: Piano, Guitar, Bass, Violin, Viola, Cello, Flute, Clarinet, Trumpet, Alto Sax, Tenor Sax, and Drums. Each has the correct MIDI sound, transposition, and default clef.
-        </p>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Transposing instruments (like Clarinet in Bb or Alto Sax in Eb) are handled automatically — what you see is the written pitch, and Nubium transposes for playback and concert-pitch export.
+          Transposing instruments (like Clarinet in Bb or Alto Sax in Eb) are handled automatically — what you see is the written pitch, and Nubium transposes for playback.
         </p>
       </article>
 
@@ -323,7 +315,8 @@ import Nav from '../components/Nav.astro';
           <p><kbd>Space</kbd> — Play or pause.</p>
           <p><kbd>Ctrl+.</kbd> — Stop and return to the beginning.</p>
           <p><kbd>Shift+M</kbd> — Toggle the metronome.</p>
-          <p>Set the tempo in the BPM field in the toolbar (20–400 BPM).</p>
+          <p><kbd>Shift+I</kbd> — Toggle count-in (metronome plays one measure before the score starts).</p>
+          <p>Set the tempo in the BPM field in the toolbar.</p>
           <p>Playback uses SoundFont instruments for realistic sound. It follows repeats, D.S., D.C., codas, and volta brackets.</p>
           <p>Select measures first, then press <kbd>Space</kbd> to loop playback over just the selection.</p>
         </div>
@@ -347,9 +340,10 @@ import Nav from '../components/Nav.astro';
       <article id="views" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Views</h2>
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
-          <p><kbd>Ctrl+Shift+1</kbd> — <strong>Full Score</strong> — shows all parts with all annotations.</p>
-          <p><kbd>Ctrl+Shift+2</kbd> — <strong>Tab View</strong> — shows guitar tablature for guitar parts.</p>
-          <p>You can toggle the visibility of specific annotation types (lyrics, chords, dynamics, rehearsal marks, tempo marks) in Settings.</p>
+          <p><kbd>Ctrl+Shift+1</kbd> — Toggle <strong>standard notation</strong> display.</p>
+          <p><kbd>Ctrl+Shift+2</kbd> — Toggle <strong>tab notation</strong> display.</p>
+          <p><kbd>Ctrl+Shift+3</kbd> — Toggle <strong>slash notation</strong> display.</p>
+          <p>You can toggle the visibility of specific annotation types (lyrics, chords, dynamics, hairpins, slurs, rehearsal marks, tempo marks) in Settings.</p>
           <p><kbd>Ctrl+B</kbd> — Toggle left sidebar. <kbd>Ctrl+Shift+B</kbd> — Toggle right sidebar.</p>
         </div>
       </article>
@@ -358,10 +352,8 @@ import Nav from '../components/Nav.astro';
       <article id="files" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Files &amp; export</h2>
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
-          <p><kbd>Ctrl+N</kbd> — New score.</p>
-          <p><kbd>Ctrl+O</kbd> — Open a file (MusicXML supported).</p>
-          <p><kbd>Ctrl+S</kbd> — Save.</p>
-          <p><kbd>Ctrl+Shift+H</kbd> — Browse file history (up to 50 snapshots of past edits).</p>
+          <p>Open MusicXML files with <kbd>Ctrl+O</kbd>.</p>
+          <p><kbd>Ctrl+Shift+H</kbd> — Browse file history. The number of snapshots is configurable in settings.</p>
         </div>
         <h3 class="text-lg font-semibold mt-8 mb-3">Export formats</h3>
         <div class="space-y-2 text-[var(--color-text-muted)] leading-relaxed">
@@ -371,7 +363,7 @@ import Nav from '../components/Nav.astro';
           <p><strong>ABC Notation</strong> and <strong>LilyPond</strong> — copy to clipboard via the Command Palette.</p>
         </div>
         <p class="text-[var(--color-text-muted)] leading-relaxed mt-4">
-          Your work is auto-saved every 2 seconds. If the app closes unexpectedly, your score is recovered on next launch.
+          Your work is auto-saved. If the app closes unexpectedly, your score is recovered on next launch.
         </p>
       </article>
 
@@ -379,12 +371,21 @@ import Nav from '../components/Nav.astro';
       <article id="guitar" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Guitar &amp; tab</h2>
         <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
-          Switch to Tab View (<kbd>Ctrl+Shift+2</kbd>) to see fret numbers on a tablature staff. Guitar parts support Standard tuning, Drop D, and Open G.
+          Toggle tab notation with <kbd>Ctrl+Shift+2</kbd> to see fret numbers on a tablature staff. Guitar parts support multiple tunings including Standard, Drop D, Open G, DADGAD, Open D, and Half Step Down.
         </p>
-        <h3 class="text-lg font-semibold mt-8 mb-3">Guitar articulations</h3>
-        <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Available via the Command Palette: bend (with semitone amount), slide up/down, hammer-on, pull-off, palm mute, and harmonics.
+        <h3 class="text-lg font-semibold mt-8 mb-3">Guitar techniques</h3>
+        <p class="text-[var(--color-text-muted)] leading-relaxed mb-3">
+          All available via the Command Palette. Techniques render on both standard notation and tab:
         </p>
+        <ul class="text-[var(--color-text-muted)] list-disc list-inside ml-4 space-y-1">
+          <li>Bend (half, full, 1&frac12; step — cycles on toggle), pre-bend, bend-release</li>
+          <li>Slide up/down, slide-in from below/above, slide-out below/above</li>
+          <li>Hammer-on, pull-off</li>
+          <li>Vibrato, tremolo picking</li>
+          <li>Palm mute, natural harmonic, let ring</li>
+          <li>Tapping, dead notes, ghost notes</li>
+          <li>Down-stroke, up-stroke, fingerpicking (p, i, m, a)</li>
+        </ul>
       </article>
 
       <h2 class="text-xs font-semibold uppercase tracking-widest text-[var(--color-text-muted)]/60 mb-8 mt-4">App</h2>
@@ -406,71 +407,34 @@ import Nav from '../components/Nav.astro';
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
           <p><kbd>Shift+Left/Right</kbd> — Extend selection by measure.</p>
           <p><kbd>Shift+Alt+Left/Right</kbd> — Extend selection by note.</p>
-          <p><kbd>Ctrl+A</kbd> — Select all. <kbd>Esc</kbd> — Clear selection.</p>
-          <p><kbd>Ctrl+C</kbd> / <kbd>Ctrl+X</kbd> / <kbd>Ctrl+V</kbd> — Copy, cut, and paste.</p>
-          <p>You can also copy your selection as ABC notation, LilyPond, or MusicXML via the Command Palette.</p>
+          <p>Copy your selection as ABC notation, LilyPond, or MusicXML via the Command Palette.</p>
         </div>
       </article>
 
       <!-- Settings -->
       <article id="settings" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Settings &amp; customization</h2>
-        <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
-          Open settings with <kbd>Ctrl+,</kbd>. You can customize:
+        <p class="text-[var(--color-text-muted)] leading-relaxed">
+          Open settings with <kbd>Ctrl+,</kbd>. Keyboard shortcuts, display options, input preferences, and more are all configurable.
         </p>
-        <ul class="text-[var(--color-text-muted)] list-disc list-inside ml-4 space-y-1">
-          <li>Default tempo, time signature, and clef</li>
-          <li>Display toggles for lyrics, chords, dynamics, rehearsal marks, and tempo marks</li>
-          <li>All keyboard shortcuts (Settings → Hotkeys)</li>
-          <li>Toolbar group visibility and order</li>
-          <li>Input preferences (pitch before duration, auto-beaming)</li>
-          <li>History snapshots limit</li>
-        </ul>
       </article>
 
       <!-- Plugins -->
       <article id="plugins" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Plugins</h2>
         <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
-          Nubium's features are built as plugins. Toggle them on and off with <kbd>Ctrl+Shift+E</kbd>. Plugins can register commands, keyboard shortcuts, toolbar panels, and sidebar panels. Browse and install community plugins from the <strong>Community</strong> tab in the plugins panel.
+          Nubium's features are built as plugins. Toggle them with <kbd>Ctrl+Shift+E</kbd>. Browse and install community plugins from the <strong>Community</strong> tab in the plugins panel.
+        </p>
+        <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
+          Many of Nubium's core features are built as plugins. Open the plugins panel to see what's available and toggle them on or off.
         </p>
 
         <h3 class="text-lg font-semibold mt-8 mb-2">AI Chat</h3>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Open with <kbd>Ctrl+Shift+A</kbd>. Describe what you want in plain language and the AI edits your score directly &mdash; notes, annotations, title, composer, tempo, parts, measures. It works by modifying the score document, so it can do almost anything you can do by hand. It cannot change app settings, cursor position, or view modes.
+          Open with <kbd>Ctrl+Shift+A</kbd>. Describe what you want in plain language and the AI edits your score directly &mdash; compose melodies, add chord progressions, write bass lines, arrange for multiple parts, transpose, change time signatures, and more. It can also run any command you could run from the command palette.
         </p>
         <p class="text-[var(--color-text-muted)] leading-relaxed mt-3">
-          Supports Anthropic Claude, OpenAI, and Google Gemini. You need your own API key &mdash; get one from your chosen provider and paste it into the AI Chat settings panel. You can undo any AI edit with <kbd>Ctrl+Z</kbd> or the "Undo Last AI Edit" option in the chat menu.
-        </p>
-
-        <h3 class="text-lg font-semibold mt-8 mb-2">Clipboard</h3>
-        <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Copy and paste notation in multiple formats. <strong>MusicXML</strong>, <strong>ABC notation</strong>, and <strong>LilyPond</strong> all support copy to clipboard and paste from clipboard. Use "Paste Notation" from the Command Palette to import from any of these formats.
-        </p>
-
-        <h3 class="text-lg font-semibold mt-8 mb-2">Export</h3>
-        <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Export as PDF (full score or individual part) and WAV audio. Available from the command palette.
-        </p>
-
-        <h3 class="text-lg font-semibold mt-8 mb-2">Transpose</h3>
-        <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Transpose selected notes or the entire score by half step, whole step, minor 3rd, major 3rd, perfect 4th, perfect 5th, or octave &mdash; up or down. All transposition commands are in the command palette.
-        </p>
-
-        <h3 class="text-lg font-semibold mt-8 mb-2">Chord Analysis</h3>
-        <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Select notes and run chord analysis from the command palette. Identifies major, minor, diminished, augmented, 7th, sus4, and sus2 chords.
-        </p>
-
-        <h3 class="text-lg font-semibold mt-8 mb-2">MIDI Input</h3>
-        <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Step-entry from a MIDI keyboard. Connect a MIDI controller and play notes to enter them at the cursor position one at a time. Uses the Web MIDI API with a native bridge fallback in the desktop app.
-        </p>
-
-        <h3 class="text-lg font-semibold mt-8 mb-2">Playback</h3>
-        <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Audio playback with transport controls. Set tempo from 20 to 400 BPM in the playback toolbar. Toggle the metronome with <kbd>Shift+M</kbd>. Play/pause with <kbd>Space</kbd>, stop with <kbd>Ctrl+.</kbd>
+          Supports Anthropic Claude (with extended thinking), OpenAI, and Google Gemini. Bring your own API key &mdash; get one from your chosen provider and paste it into the AI settings panel. Configure temperature, max tokens, thinking budget, and model selection per provider. Undo any AI edit with <kbd>Ctrl+Z</kbd>.
         </p>
       </article>
 
@@ -490,7 +454,8 @@ import Nav from '../components/Nav.astro';
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>I</kbd></td><td class="py-2">Insert mode</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>K</kbd></td><td class="py-2">Toggle pitch before duration</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+G</kbd></td><td class="py-2">Grace note mode</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>Shift+S</kbd></td><td class="py-2">Start/end slur</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+S</kbd></td><td class="py-2">Start/end slur</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>T</kbd></td><td class="py-2">Toggle tie</td></tr>
             </tbody>
           </table>
         </div>
@@ -509,7 +474,7 @@ import Nav from '../components/Nav.astro';
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>=</kbd> / <kbd>+</kbd></td><td class="py-2">Sharp</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>=</kbd></td><td class="py-2">Sharp</td></tr>
               <tr><td class="py-2 pr-8"><kbd>-</kbd></td><td class="py-2">Flat</td></tr>
             </tbody>
           </table>
@@ -536,11 +501,7 @@ import Nav from '../components/Nav.astro';
             <tbody class="text-[var(--color-text-muted)]">
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+Left/Right</kbd></td><td class="py-2">Extend selection</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+Alt+Left/Right</kbd></td><td class="py-2">Extend note selection</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+A</kbd></td><td class="py-2">Select all</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Esc</kbd></td><td class="py-2">Clear selection</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+C</kbd></td><td class="py-2">Copy</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+X</kbd></td><td class="py-2">Cut</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>Ctrl+V</kbd></td><td class="py-2">Paste</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>Esc</kbd></td><td class="py-2">Clear selection</td></tr>
             </tbody>
           </table>
         </div>
@@ -567,7 +528,9 @@ import Nav from '../components/Nav.astro';
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+K</kbd></td><td class="py-2">Key signature</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+R</kbd></td><td class="py-2">Rehearsal mark</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+B</kbd></td><td class="py-2">Barline</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>Shift+N</kbd></td><td class="py-2">Navigation marks</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+N</kbd></td><td class="py-2">Navigation marks</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+Alt+,</kbd></td><td class="py-2">Crescendo (start/end)</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>Shift+Alt+.</kbd></td><td class="py-2">Diminuendo (start/end)</td></tr>
             </tbody>
           </table>
         </div>
@@ -580,7 +543,8 @@ import Nav from '../components/Nav.astro';
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+&lt;</kbd></td><td class="py-2">Staccato</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+T</kbd></td><td class="py-2">Tenuto</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+U</kbd></td><td class="py-2">Fermata</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>Shift+^</kbd></td><td class="py-2">Marcato</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+^</kbd></td><td class="py-2">Marcato</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>Shift+Alt+R</kbd></td><td class="py-2">Trill</td></tr>
             </tbody>
           </table>
         </div>
@@ -589,8 +553,6 @@ import Nav from '../components/Nav.astro';
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Z</kbd></td><td class="py-2">Undo</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+Z</kbd></td><td class="py-2">Redo</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+M</kbd></td><td class="py-2">Insert measure</td></tr>
               <tr><td class="py-2 pr-8"><kbd>Ctrl+Backspace</kbd></td><td class="py-2">Delete measure</td></tr>
             </tbody>
@@ -603,7 +565,8 @@ import Nav from '../components/Nav.astro';
             <tbody class="text-[var(--color-text-muted)]">
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Space</kbd></td><td class="py-2">Play/pause</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+.</kbd></td><td class="py-2">Stop</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>Shift+M</kbd></td><td class="py-2">Toggle metronome</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+M</kbd></td><td class="py-2">Toggle metronome</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>Shift+I</kbd></td><td class="py-2">Toggle count-in</td></tr>
             </tbody>
           </table>
         </div>
@@ -612,9 +575,6 @@ import Nav from '../components/Nav.astro';
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+N</kbd></td><td class="py-2">New score</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+O</kbd></td><td class="py-2">Open file</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+S</kbd></td><td class="py-2">Save</td></tr>
               <tr><td class="py-2 pr-8"><kbd>Ctrl+Shift+H</kbd></td><td class="py-2">File history</td></tr>
             </tbody>
           </table>
@@ -629,8 +589,9 @@ import Nav from '../components/Nav.astro';
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+B</kbd></td><td class="py-2">Toggle left sidebar</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+B</kbd></td><td class="py-2">Toggle right sidebar</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+E</kbd></td><td class="py-2">Toggle plugins</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+1</kbd></td><td class="py-2">Full Score view</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+2</kbd></td><td class="py-2">Tab view</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+1</kbd></td><td class="py-2">Toggle standard notation</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+2</kbd></td><td class="py-2">Toggle tab notation</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+3</kbd></td><td class="py-2">Toggle slash notation</td></tr>
               <tr><td class="py-2 pr-8"><kbd>Ctrl+Shift+A</kbd></td><td class="py-2">Toggle AI Chat</td></tr>
             </tbody>
           </table>
@@ -641,14 +602,14 @@ import Nav from '../components/Nav.astro';
       <div class="mt-16 p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-center">
         <h2 class="text-xl font-bold">Want to help build Nubium?</h2>
         <p class="mt-2 text-[var(--color-text-muted)]">
-          Nubium is open source and welcomes contributions &mdash; from bug fixes to new <a href="https://github.com/nth-chile/nubium-plugins" class="text-[var(--color-accent)] hover:underline">plugins</a>.
+          Nubium is open source and welcomes contributions &mdash; from bug fixes to new <a href="https://github.com/nth-chile/nubium-plugins" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:underline">plugins</a>.
         </p>
         <div class="mt-4 flex items-center justify-center gap-3">
-          <a href="https://github.com/nth-chile/nubium" class="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white transition-colors no-underline">
+          <a href="https://github.com/nth-chile/nubium" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white transition-colors no-underline">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
             App
           </a>
-          <a href="https://github.com/nth-chile/nubium-plugins" class="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-text-muted)] transition-colors no-underline">
+          <a href="https://github.com/nth-chile/nubium-plugins" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg border border-[var(--color-border)] hover:border-[var(--color-text-muted)] transition-colors no-underline">
             Plugin registry
           </a>
         </div>

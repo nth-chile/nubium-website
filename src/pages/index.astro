@@ -12,13 +12,13 @@ import Nav from '../components/Nav.astro';
   <section class="pt-32 pb-20 px-6">
     <div class="mx-auto max-w-4xl text-center">
       <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1]">
-        Write music,<br />not markup.
+        Free, open-source<br />music notation.
       </h1>
       <p class="mt-6 text-lg md:text-xl text-[var(--color-text-muted)] max-w-2xl mx-auto">
-        Free, fast notation software that stays out of your way. Open formats, extensible with plugins, runs on your machine.
+        Runs on your desktop or in the browser. Extend it with community plugins, AI editing tools, or write your own.
       </p>
       <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6">
-        <a href="https://app.nubium.rocks" class="px-8 py-3.5 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold text-lg transition-colors no-underline">
+        <a href="https://app.nubium.rocks" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold text-lg transition-colors no-underline">
           Try in Browser
         </a>
         <a href="/download" id="hero-download" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] font-medium text-lg transition-colors no-underline">
@@ -31,8 +31,8 @@ import Nav from '../components/Nav.astro';
   <!-- App Screenshot -->
   <section class="px-6 pb-24">
     <div class="mx-auto max-w-5xl">
-      <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-card)] overflow-hidden aspect-[16/10] flex items-center justify-center">
-        <p class="text-[var(--color-text-muted)] text-sm">App screenshot placeholder</p>
+      <div class="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-card)] overflow-hidden">
+        <img src="/screenshot.png" alt="Nubium music notation editor showing a score called Sea of Clouds" class="w-full h-auto block" />
       </div>
     </div>
   </section>
@@ -41,21 +41,21 @@ import Nav from '../components/Nav.astro';
   <section class="px-6 pb-32">
     <div class="mx-auto max-w-3xl space-y-12">
       <div>
-        <h3 class="text-xl font-semibold mb-2">Fast and local.</h3>
+        <h3 class="text-xl font-semibold mb-2">Fully featured</h3>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Nubium runs on your machine, not in a browser tab. Instant startup, no loading spinners, no account required. Your files stay on your disk.
+          MIDI input, guitar tabs, AI editing, four independent voices, flexible input modes, export to PDF or audio, and more. We're in beta and adding features fast — tell us what you need.
         </p>
       </div>
       <div>
-        <h3 class="text-xl font-semibold mb-2">Open formats.</h3>
+        <h3 class="text-xl font-semibold mb-2">Works with all standard formats</h3>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Import and export MusicXML. Your scores work with MuseScore, Dorico, Sibelius, and anything else that speaks MusicXML. No lock-in, ever.
+          Nubium uses MusicXML as its file format, so your scores are compatible with almost all other tools. Paste tabs, LilyPond, or ABC notation onto a score and see it instantly render. Select notes and copy as any text-based format.
         </p>
       </div>
       <div>
-        <h3 class="text-xl font-semibold mb-2">Make it yours.</h3>
+        <h3 class="text-xl font-semibold mb-2">Configure your workspace</h3>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Extend Nubium with plugins. Transpose, analyze chords, export PDF, connect MIDI controllers — or build your own plugin.
+          Plugin-based architecture and drag-and-drop UI panels. Turn off what you don't need, find or build plugins for what you do.
         </p>
       </div>
     </div>
@@ -64,57 +64,62 @@ import Nav from '../components/Nav.astro';
   <!-- Features Grid -->
   <section class="px-6 pb-32">
     <div class="mx-auto max-w-5xl">
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-12 text-center">Everything you need.</h2>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-12 text-center">Features</h2>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
-          <i class="ri-piano-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
+          <i class="ri-list-settings-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
+          <h3 class="font-semibold mb-1">Input modes</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Pitch-before-duration, insert mode, or standard entry. Work however you prefer.</p>
+        </div>
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
+          <i class="ri-sparkling-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
+          <h3 class="font-semibold mb-1">AI editing</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Edit your score with natural language. Bring your own API key.</p>
+        </div>
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
+          <i class="fa-solid fa-guitar text-2xl text-[var(--color-accent)] mb-3 block"></i>
+          <h3 class="font-semibold mb-1">Guitar tablature</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Full tab support with a wide range of guitar-specific articulations and techniques.</p>
+        </div>
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
+          <i class="ri-keyboard-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
           <h3 class="font-semibold mb-1">MIDI input</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Step entry or real-time recording from any MIDI controller.</p>
-        </div>
-        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
-          <i class="ri-music-2-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
-          <h3 class="font-semibold mb-1">Multiple voices</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Independent voices per staff with cross-staff notation.</p>
-        </div>
-        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
-          <i class="ri-hashtag text-2xl text-[var(--color-accent)] mb-3 block"></i>
-          <h3 class="font-semibold mb-1">Chord symbols & tab</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Chord symbols and guitar tablature.</p>
-        </div>
-        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
-          <i class="ri-play-circle-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
-          <h3 class="font-semibold mb-1">Playback</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Hear your score with swing, shuffle, repeats, D.S., and codas.</p>
-        </div>
-        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
-          <i class="ri-text text-2xl text-[var(--color-accent)] mb-3 block"></i>
-          <h3 class="font-semibold mb-1">Lyrics & dynamics</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Full support for lyrics, dynamics, articulations, and expressions.</p>
-        </div>
-        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
-          <i class="ri-arrow-up-down-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
-          <h3 class="font-semibold mb-1">Transposition</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Transpose instantly. Extract individual parts from a full score.</p>
-        </div>
-        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
-          <i class="ri-file-pdf-2-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
-          <h3 class="font-semibold mb-1">PDF & MusicXML export</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Export to PDF for print or MusicXML for any other notation app.</p>
+          <p class="text-sm text-[var(--color-text-muted)]">Step entry from any MIDI controller.</p>
         </div>
         <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
           <i class="ri-puzzle-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
-          <h3 class="font-semibold mb-1">Plugins</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Extend Nubium with community plugins or build your own.</p>
+          <h3 class="font-semibold mb-1">Plugins & configuration</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Install community plugins or write your own. Customize keybindings, settings, and layout.</p>
         </div>
         <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
-          <i class="ri-computer-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
-          <h3 class="font-semibold mb-1">Cross-platform</h3>
-          <p class="text-sm text-[var(--color-text-muted)]">Runs natively on macOS, Windows, and Linux.</p>
+          <i class="ri-music-2-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
+          <h3 class="font-semibold mb-1">4 independent voices</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Four voices per measure with a color-coded cursor so you always know which voice you're editing.</p>
+        </div>
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
+          <i class="ri-terminal-box-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
+          <h3 class="font-semibold mb-1">Command palette</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Search and run any command without leaving the keyboard.</p>
+        </div>
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
+          <i class="ri-clipboard-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
+          <h3 class="font-semibold mb-1">Paste & copy as</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Paste guitar tabs, LilyPond, or ABC directly onto the sheet and see it instantly render. Select notes and copy as any format.</p>
+        </div>
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
+          <i class="ri-history-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
+          <h3 class="font-semibold mb-1">File history</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Automatic snapshots of your score. Go back to a previous version anytime.</p>
+        </div>
+        <div class="p-6 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
+          <i class="ri-file-download-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
+          <h3 class="font-semibold mb-1">Export to PDF & audio</h3>
+          <p class="text-sm text-[var(--color-text-muted)]">Print-ready PDFs and WAV audio export.</p>
         </div>
         <div class="p-6 rounded-xl border border-dashed border-[var(--color-border)] bg-[var(--color-bg-subtle)]">
           <i class="ri-lightbulb-fill text-2xl text-[var(--color-accent)] mb-3 block"></i>
           <h3 class="font-semibold mb-1">Your feature here</h3>
-          <p class="text-sm text-[var(--color-text-muted)] mb-3">Tell us what you need — no account required.</p>
+          <p class="text-sm text-[var(--color-text-muted)] mb-3">Tell us what you need.</p>
           <form action="https://formspree.io/f/xgopavpe" method="POST" class="space-y-2" id="homepage-suggest-form">
             <textarea name="message" required rows="2" placeholder="I wish Nubium could…" class="w-full px-3 py-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] text-[var(--color-text)] placeholder-[var(--color-text-muted)] resize-none focus:outline-none focus:border-[var(--color-accent)] transition-colors text-xs"></textarea>
             <button type="submit" class="w-full px-3 py-1.5 rounded-lg bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-medium text-xs transition-colors cursor-pointer">Send</button>
@@ -128,12 +133,12 @@ import Nav from '../components/Nav.astro';
   <!-- CTA -->
   <section class="px-6 pb-32">
     <div class="mx-auto max-w-3xl text-center">
-      <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Ready to write?</h2>
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight">Try Nubium</h2>
       <p class="mt-4 text-[var(--color-text-muted)] text-lg">
-        Nubium is free. No account, no trial, no strings.
+        Nubium is free. No account required.
       </p>
       <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6">
-        <a href="https://app.nubium.rocks" class="px-8 py-3.5 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold text-lg transition-colors no-underline">
+        <a href="https://app.nubium.rocks" target="_blank" rel="noopener noreferrer" class="px-8 py-3.5 rounded-xl bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white font-semibold text-lg transition-colors no-underline">
           Try in Browser
         </a>
         <a href="/download" id="cta-download" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] font-medium text-lg transition-colors no-underline">
@@ -146,13 +151,13 @@ import Nav from '../components/Nav.astro';
   <!-- Quick Links -->
   <section class="px-6 pb-32">
     <div class="mx-auto max-w-5xl grid sm:grid-cols-3 gap-8">
-      <a href="/download" class="p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] hover:border-[var(--color-text-muted)] transition-colors no-underline group text-center">
-        <h3 class="text-xl font-semibold group-hover:text-[var(--color-accent)] transition-colors">Download</h3>
-        <p class="mt-2 text-sm text-[var(--color-text-muted)]">Get Nubium for your platform.</p>
+      <a href="/help" class="p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] hover:border-[var(--color-text-muted)] transition-colors no-underline group text-center">
+        <h3 class="text-xl font-semibold group-hover:text-[var(--color-accent)] transition-colors">Help docs</h3>
+        <p class="mt-2 text-sm text-[var(--color-text-muted)]">Learn how to use Nubium.</p>
       </a>
-      <a href="https://github.com/nth-chile/nubium" class="p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] hover:border-[var(--color-text-muted)] transition-colors no-underline group text-center">
-        <h3 class="text-xl font-semibold group-hover:text-[var(--color-accent)] transition-colors">GitHub</h3>
-        <p class="mt-2 text-sm text-[var(--color-text-muted)]">Source code, issues, and roadmap.</p>
+      <a href="/roadmap" class="p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] hover:border-[var(--color-text-muted)] transition-colors no-underline group text-center">
+        <h3 class="text-xl font-semibold group-hover:text-[var(--color-accent)] transition-colors">Roadmap</h3>
+        <p class="mt-2 text-sm text-[var(--color-text-muted)]">See what we're working on.</p>
       </a>
       <a href="/community" class="p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] hover:border-[var(--color-text-muted)] transition-colors no-underline group text-center">
         <h3 class="text-xl font-semibold group-hover:text-[var(--color-accent)] transition-colors">Community</h3>
