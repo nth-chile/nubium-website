@@ -149,8 +149,11 @@ import Nav from '../components/Nav.astro';
         <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
           Type <kbd>A</kbd> through <kbd>G</kbd> to insert notes. Press <kbd>R</kbd> for a rest.
         </p>
-        <p class="text-[var(--color-text-muted)] leading-relaxed">
+        <p class="text-[var(--color-text-muted)] leading-relaxed mb-4">
           Adjust pitch after entering a note: <kbd>Alt+Up/Down</kbd> moves by diatonic step, <kbd>Shift+Alt+Up/Down</kbd> by chromatic step, and <kbd>Ctrl+Alt+Up/Down</kbd> by octave.
+        </p>
+        <p class="text-[var(--color-text-muted)] leading-relaxed">
+          <strong>Chords.</strong> Hold <kbd>Shift</kbd> and press <kbd>A</kbd>&ndash;<kbd>G</kbd> to add a pitch to the note at the cursor, stacking a chord. Click a single notehead to target just that pitch &mdash; letters, accidentals, and pitch nudges then only affect that head. Use <kbd>[</kbd> and <kbd>]</kbd> to cycle through the heads of a chord without reaching for the mouse.
         </p>
       </article>
 
@@ -208,7 +211,7 @@ import Nav from '../components/Nav.astro';
           Each measure supports up to four independent voices. Switch voices with <kbd>Ctrl+1</kbd> through <kbd>Ctrl+4</kbd>.
         </p>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
-          Use <kbd>Shift+X</kbd> to toggle cross-staff notation — this renders a note on a different staff than its voice, common in piano scores.
+          Press <kbd>X</kbd> in normal mode to toggle cross-staff notation — this renders a note on a different staff than its voice, common in piano scores.
         </p>
       </article>
 
@@ -221,8 +224,8 @@ import Nav from '../components/Nav.astro';
         <div class="space-y-2 text-[var(--color-text-muted)] leading-relaxed">
           <p><kbd>Shift+&gt;</kbd> — Accent</p>
           <p><kbd>Shift+&lt;</kbd> — Staccato</p>
-          <p><kbd>Shift+T</kbd> — Tenuto</p>
-          <p><kbd>Shift+U</kbd> — Fermata</p>
+          <p><kbd>Shift+_</kbd> — Tenuto</p>
+          <p><kbd>U</kbd> — Fermata</p>
           <p><kbd>Shift+^</kbd> — Marcato</p>
           <p><kbd>Shift+Alt+R</kbd> — Trill</p>
         </div>
@@ -236,15 +239,18 @@ import Nav from '../components/Nav.astro';
       <!-- Annotations -->
       <article id="annotations" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Annotations</h2>
+        <p class="text-[var(--color-text-muted)] leading-relaxed mb-4 text-sm">
+          Bare-letter shortcuts apply in normal mode (toggle with <kbd>N</kbd>). In note entry mode, the same letters insert pitches.
+        </p>
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
-          <p><kbd>Shift+C</kbd> — <strong>Chord symbols.</strong> Type any chord (e.g., "Cmaj7", "Dm7b5/A") and press Enter to commit.</p>
-          <p><kbd>Shift+L</kbd> — <strong>Lyrics.</strong></p>
-          <p><kbd>Shift+D</kbd> — <strong>Dynamics.</strong> Choose from pp, p, mp, mf, f, ff, sfz, fp.</p>
+          <p><kbd>C</kbd> — <strong>Chord symbols.</strong> Type any chord (e.g., "Cmaj7", "Dm7b5/A") and press Enter to commit.</p>
+          <p><kbd>L</kbd> — <strong>Lyrics.</strong></p>
+          <p><kbd>D</kbd> — <strong>Dynamics.</strong> Choose from pp, p, mp, mf, f, ff, sfz, fp.</p>
           <p><kbd>Ctrl+Shift+T</kbd> — <strong>Tempo marking.</strong> Set BPM and optional text (Allegro, Presto, etc.).</p>
           <p><kbd>Ctrl+T</kbd> — <strong>Time signature.</strong> Change the time signature at the current measure.</p>
           <p><kbd>Ctrl+K</kbd> — <strong>Key signature.</strong> Set the key for the current measure and beyond.</p>
-          <p><kbd>Shift+R</kbd> — <strong>Rehearsal mark.</strong> Add a label (A, B, Intro, Verse, etc.).</p>
-          <p><kbd>Shift+S</kbd> — <strong>Slur.</strong> Press once to start, again to end.</p>
+          <p><kbd>R</kbd> — <strong>Rehearsal mark.</strong> Add a label (A, B, Intro, Verse, etc.).</p>
+          <p><kbd>S</kbd> — <strong>Slur.</strong> Press once to start, again to end.</p>
           <p><kbd>T</kbd> — <strong>Tie.</strong> Toggle a tie on the current note.</p>
           <p><kbd>Shift+Alt+,</kbd> — <strong>Crescendo.</strong> Press once to start, again to end.</p>
           <p><kbd>Shift+Alt+.</kbd> — <strong>Diminuendo.</strong> Press once to start, again to end.</p>
@@ -258,8 +264,8 @@ import Nav from '../components/Nav.astro';
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
           <p><kbd>Ctrl+M</kbd> — Insert a new measure after the current one.</p>
           <p><kbd>Ctrl+Backspace</kbd> — Delete the current measure.</p>
-          <p><kbd>Shift+B</kbd> — Set barline type: single, double, final, repeat start, repeat end, or repeat both.</p>
-          <p>Use the Command Palette to toggle a measure as a <strong>pickup</strong> (anacrusis).</p>
+          <p><kbd>B</kbd> — Set barline type: single, double, final, repeat start, repeat end, or repeat both. Repeat ends can take a play count (× N).</p>
+          <p>Use the Command Palette to toggle a measure as a <strong>pickup</strong> (anacrusis), or to add <strong>system</strong>, <strong>page</strong>, or <strong>section</strong> breaks. A section break also restarts measure numbering.</p>
         </div>
       </article>
 
@@ -278,7 +284,7 @@ import Nav from '../components/Nav.astro';
       <article id="repeats" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Repeats &amp; navigation marks</h2>
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
-          <p>Set repeat barlines with <kbd>Shift+B</kbd>: repeat start, repeat end, or both.</p>
+          <p>Set repeat barlines with <kbd>B</kbd> in normal mode: repeat start, repeat end, or both. Repeat ends can take a play count (× N).</p>
           <p>Open the navigation marks popover with <kbd>Shift+N</kbd> to add:</p>
           <ul class="list-disc list-inside ml-4 space-y-1">
             <li><strong>Segno</strong> — marks a jump-to point</li>
@@ -314,12 +320,16 @@ import Nav from '../components/Nav.astro';
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
           <p><kbd>Space</kbd> — Play or pause.</p>
           <p><kbd>Ctrl+.</kbd> — Stop and return to the beginning.</p>
-          <p><kbd>Shift+M</kbd> — Toggle the metronome.</p>
+          <p><kbd>M</kbd> — Toggle the metronome.</p>
           <p><kbd>Shift+I</kbd> — Toggle count-in (metronome plays one measure before the score starts).</p>
           <p>Set the tempo in the BPM field in the toolbar.</p>
           <p>Playback uses SoundFont instruments for realistic sound. It follows repeats, D.S., D.C., codas, and volta brackets.</p>
           <p>Select measures first, then press <kbd>Space</kbd> to loop playback over just the selection.</p>
         </div>
+        <h3 class="text-lg font-semibold mt-8 mb-3">Mute notes</h3>
+        <p class="text-[var(--color-text-muted)] leading-relaxed">
+          Press <kbd>Shift+M</kbd> to toggle mute on the selected note, chord, or grace note. Muted notes still render (at reduced opacity) but are skipped during playback.
+        </p>
         <h3 class="text-lg font-semibold mt-8 mb-3">Swing &amp; feel</h3>
         <p class="text-[var(--color-text-muted)] leading-relaxed">
           Set the feel via the command palette: <strong>Straight</strong> (default), <strong>Swing</strong>, <strong>Hard Swing</strong>, or <strong>Shuffle</strong>.
@@ -345,6 +355,8 @@ import Nav from '../components/Nav.astro';
           <p><kbd>Ctrl+Shift+3</kbd> — Toggle <strong>slash notation</strong> display.</p>
           <p>You can toggle the visibility of specific annotation types (lyrics, chords, dynamics, hairpins, slurs, rehearsal marks, tempo marks) in Settings.</p>
           <p><kbd>Ctrl+B</kbd> — Toggle left sidebar. <kbd>Ctrl+Shift+B</kbd> — Toggle right sidebar.</p>
+          <p><kbd>Ctrl+=</kbd> / <kbd>Ctrl+-</kbd> / <kbd>Ctrl+0</kbd> — Zoom in, zoom out, reset zoom.</p>
+          <p><kbd>Shift+?</kbd> — Open the in-app keyboard shortcut cheat sheet.</p>
         </div>
       </article>
 
@@ -352,7 +364,7 @@ import Nav from '../components/Nav.astro';
       <article id="files" class="mb-20">
         <h2 class="text-2xl font-bold mb-4">Files &amp; export</h2>
         <div class="space-y-4 text-[var(--color-text-muted)] leading-relaxed">
-          <p>Open MusicXML files with <kbd>Ctrl+O</kbd>.</p>
+          <p><kbd>Ctrl+N</kbd> — New score. <kbd>Ctrl+O</kbd> — Open a MusicXML file. <kbd>Ctrl+S</kbd> — Save.</p>
           <p><kbd>Ctrl+Shift+H</kbd> — Browse file history. The number of snapshots is configurable in settings.</p>
         </div>
         <h3 class="text-lg font-semibold mt-8 mb-3">Export formats</h3>
@@ -363,7 +375,7 @@ import Nav from '../components/Nav.astro';
           <p><strong>ABC Notation</strong> and <strong>LilyPond</strong> — copy to clipboard via the Command Palette.</p>
         </div>
         <p class="text-[var(--color-text-muted)] leading-relaxed mt-4">
-          Your work is auto-saved. If the app closes unexpectedly, your score is recovered on next launch.
+          Saving to disk is explicit (<kbd>Ctrl+S</kbd>). The status bar shows <strong>Unsaved</strong> when there are unsaved changes. Nubium also keeps automatic crash-recovery snapshots, so if the app closes unexpectedly your score is restored on next launch.
         </p>
       </article>
 
@@ -434,42 +446,56 @@ import Nav from '../components/Nav.astro';
           Open with <kbd>Ctrl+Shift+A</kbd>. Describe what you want in plain language and the AI edits your score directly &mdash; compose melodies, add chord progressions, write bass lines, arrange for multiple parts, transpose, change time signatures, and more. It can also run any command you could run from the command palette.
         </p>
         <p class="text-[var(--color-text-muted)] leading-relaxed mt-3">
-          Supports Anthropic Claude (with extended thinking), OpenAI, and Google Gemini. Bring your own API key &mdash; get one from your chosen provider and paste it into the AI settings panel. Configure temperature, max tokens, thinking budget, and model selection per provider. Undo any AI edit with <kbd>Ctrl+Z</kbd>.
+          Supports Anthropic Claude, OpenAI, and Google Gemini. Bring your own API key &mdash; get one from your chosen provider and paste it into the AI settings panel, then pick a model. Undo any AI edit with <kbd>Ctrl+Z</kbd>.
         </p>
       </article>
 
       <!-- Keyboard Shortcuts Reference -->
       <article id="shortcuts" class="mb-20">
         <h2 class="text-2xl font-bold mb-6">All keyboard shortcuts</h2>
+        <!-- AUTOGEN:SHORTCUTS START -->
         <p class="text-[var(--color-text-muted)] text-sm mb-6">On Mac, use <kbd>Cmd</kbd> in place of <kbd>Ctrl</kbd>. All shortcuts can be customized in Settings → Hotkeys.</p>
-
         <h3 class="text-lg font-semibold mt-8 mb-3">Notes</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>A</kbd>–<kbd>G</kbd></td><td class="py-2">Insert note</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>A</kbd></td><td class="py-2">Insert A</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>B</kbd></td><td class="py-2">Insert B</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>C</kbd></td><td class="py-2">Insert C</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>D</kbd></td><td class="py-2">Insert D</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>E</kbd></td><td class="py-2">Insert E</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>F</kbd></td><td class="py-2">Insert F</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>G</kbd></td><td class="py-2">Insert G</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>R</kbd></td><td class="py-2">Insert rest</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Backspace</kbd></td><td class="py-2">Delete note</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>N</kbd></td><td class="py-2">Step entry mode</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>I</kbd></td><td class="py-2">Insert mode</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>K</kbd></td><td class="py-2">Toggle pitch before duration</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>N</kbd></td><td class="py-2">Note entry mode</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>I</kbd></td><td class="py-2">Insert sub-mode</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>K</kbd></td><td class="py-2">Pitch before duration</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+G</kbd></td><td class="py-2">Grace note mode</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+S</kbd></td><td class="py-2">Start/end slur</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>T</kbd></td><td class="py-2">Toggle tie</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>S</kbd></td><td class="py-2">Slur</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>T</kbd></td><td class="py-2">Tie</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+M</kbd></td><td class="py-2">Mute (suppress playback)</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>X</kbd></td><td class="py-2">Toggle cross-staff</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>]</kbd></td><td class="py-2">Next chord head</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>[</kbd></td><td class="py-2">Previous chord head</td></tr>
             </tbody>
           </table>
         </div>
-
         <h3 class="text-lg font-semibold mt-8 mb-3">Duration</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>1</kbd>–<kbd>7</kbd></td><td class="py-2">Whole through 64th note</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>1</kbd></td><td class="py-2">Whole note</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>2</kbd></td><td class="py-2">Half note</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>3</kbd></td><td class="py-2">Quarter note</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>4</kbd></td><td class="py-2">Eighth note</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>5</kbd></td><td class="py-2">16th note</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>6</kbd></td><td class="py-2">32nd note</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>7</kbd></td><td class="py-2">64th note</td></tr>
               <tr><td class="py-2 pr-8"><kbd>.</kbd></td><td class="py-2">Toggle dot</td></tr>
             </tbody>
           </table>
         </div>
-
         <h3 class="text-lg font-semibold mt-8 mb-3">Accidentals</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
@@ -479,127 +505,161 @@ import Nav from '../components/Nav.astro';
             </tbody>
           </table>
         </div>
-
         <h3 class="text-lg font-semibold mt-8 mb-3">Navigation</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Left/Right</kbd></td><td class="py-2">Move cursor</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Up/Down</kbd></td><td class="py-2">Switch part</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Alt+Up/Down</kbd></td><td class="py-2">Pitch up/down (diatonic)</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+Alt+Up/Down</kbd></td><td class="py-2">Pitch up/down (chromatic)</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Alt+Up/Down</kbd></td><td class="py-2">Octave up/down</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>←</kbd></td><td class="py-2">Move cursor left</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>→</kbd></td><td class="py-2">Move cursor right</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Alt+↑</kbd></td><td class="py-2">Pitch up (diatonic)</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Alt+↓</kbd></td><td class="py-2">Pitch down (diatonic)</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Alt+Shift+↑</kbd></td><td class="py-2">Pitch up (chromatic)</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Alt+Shift+↓</kbd></td><td class="py-2">Pitch down (chromatic)</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Alt+↑</kbd></td><td class="py-2">Octave up</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Alt+↓</kbd></td><td class="py-2">Octave down</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>↑</kbd></td><td class="py-2">Previous part</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>↓</kbd></td><td class="py-2">Next part</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+←</kbd></td><td class="py-2">Previous measure</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+→</kbd></td><td class="py-2">Next measure</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>;</kbd></td><td class="py-2">Previous measure (alt)</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>'</kbd></td><td class="py-2">Next measure (alt)</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Enter</kbd></td><td class="py-2">Go to beginning</td></tr>
               <tr><td class="py-2 pr-8"><kbd>Ctrl+G</kbd></td><td class="py-2">Go to measure</td></tr>
             </tbody>
           </table>
         </div>
-
         <h3 class="text-lg font-semibold mt-8 mb-3">Selection</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+Left/Right</kbd></td><td class="py-2">Extend selection</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+Alt+Left/Right</kbd></td><td class="py-2">Extend note selection</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>Esc</kbd></td><td class="py-2">Clear selection</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+←</kbd></td><td class="py-2">Extend selection left</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+→</kbd></td><td class="py-2">Extend selection right</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Alt+Shift+←</kbd></td><td class="py-2">Extend note selection left</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Alt+Shift+→</kbd></td><td class="py-2">Extend note selection right</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+A</kbd></td><td class="py-2">Select all</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Esc</kbd></td><td class="py-2">Clear selection</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+C</kbd></td><td class="py-2">Copy</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+V</kbd></td><td class="py-2">Paste</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>Ctrl+X</kbd></td><td class="py-2">Cut</td></tr>
             </tbody>
           </table>
         </div>
-
         <h3 class="text-lg font-semibold mt-8 mb-3">Voices</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+1</kbd>–<kbd>Ctrl+4</kbd></td><td class="py-2">Switch voice</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>Shift+X</kbd></td><td class="py-2">Toggle cross-staff</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+1</kbd></td><td class="py-2">Voice 1</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+2</kbd></td><td class="py-2">Voice 2</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+3</kbd></td><td class="py-2">Voice 3</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>Ctrl+4</kbd></td><td class="py-2">Voice 4</td></tr>
             </tbody>
           </table>
         </div>
-
         <h3 class="text-lg font-semibold mt-8 mb-3">Annotations</h3>
+        <p class="text-xs text-[var(--color-text-muted)] mb-3">Bare-letter shortcuts apply in normal mode (toggle with <kbd>N</kbd>).</p>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+C</kbd></td><td class="py-2">Chord symbol</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+L</kbd></td><td class="py-2">Lyric</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+D</kbd></td><td class="py-2">Dynamic</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Alt+Shift+,</kbd></td><td class="py-2">Crescendo</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Alt+Shift+.</kbd></td><td class="py-2">Diminuendo</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>C</kbd></td><td class="py-2">Chord input</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>L</kbd></td><td class="py-2">Lyric input</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>D</kbd></td><td class="py-2">Dynamics</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+T</kbd></td><td class="py-2">Tempo marking</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+T</kbd></td><td class="py-2">Time signature</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+K</kbd></td><td class="py-2">Key signature</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+R</kbd></td><td class="py-2">Rehearsal mark</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+B</kbd></td><td class="py-2">Barline</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+N</kbd></td><td class="py-2">Navigation marks</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+Alt+,</kbd></td><td class="py-2">Crescendo (start/end)</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>Shift+Alt+.</kbd></td><td class="py-2">Diminuendo (start/end)</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>R</kbd></td><td class="py-2">Rehearsal mark</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>B</kbd></td><td class="py-2">Barline</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>Shift+N</kbd></td><td class="py-2">Navigation marks</td></tr>
             </tbody>
           </table>
         </div>
-
         <h3 class="text-lg font-semibold mt-8 mb-3">Articulations</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+&gt;</kbd></td><td class="py-2">Accent</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+&lt;</kbd></td><td class="py-2">Staccato</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+T</kbd></td><td class="py-2">Tenuto</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+U</kbd></td><td class="py-2">Fermata</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+_</kbd></td><td class="py-2">Tenuto</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>U</kbd></td><td class="py-2">Fermata</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+^</kbd></td><td class="py-2">Marcato</td></tr>
-              <tr><td class="py-2 pr-8"><kbd>Shift+Alt+R</kbd></td><td class="py-2">Trill</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>Alt+Shift+R</kbd></td><td class="py-2">Trill</td></tr>
             </tbody>
           </table>
         </div>
-
         <h3 class="text-lg font-semibold mt-8 mb-3">Editing</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Z</kbd></td><td class="py-2">Undo</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+Z</kbd></td><td class="py-2">Redo</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+M</kbd></td><td class="py-2">Insert measure</td></tr>
               <tr><td class="py-2 pr-8"><kbd>Ctrl+Backspace</kbd></td><td class="py-2">Delete measure</td></tr>
             </tbody>
           </table>
         </div>
-
         <h3 class="text-lg font-semibold mt-8 mb-3">Playback</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Space</kbd></td><td class="py-2">Play/pause</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+.</kbd></td><td class="py-2">Stop</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+M</kbd></td><td class="py-2">Toggle metronome</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Space</kbd></td><td class="py-2">Play / Pause</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+.</kbd></td><td class="py-2">Stop playback</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>M</kbd></td><td class="py-2">Toggle metronome</td></tr>
               <tr><td class="py-2 pr-8"><kbd>Shift+I</kbd></td><td class="py-2">Toggle count-in</td></tr>
             </tbody>
           </table>
         </div>
-
         <h3 class="text-lg font-semibold mt-8 mb-3">File</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+N</kbd></td><td class="py-2">New score</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+O</kbd></td><td class="py-2">Open file</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+S</kbd></td><td class="py-2">Save file</td></tr>
               <tr><td class="py-2 pr-8"><kbd>Ctrl+Shift+H</kbd></td><td class="py-2">File history</td></tr>
             </tbody>
           </table>
         </div>
-
+        <h3 class="text-lg font-semibold mt-8 mb-3">Views</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <tbody class="text-[var(--color-text-muted)]">
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+1</kbd></td><td class="py-2">Toggle standard notation</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+2</kbd></td><td class="py-2">Toggle tab notation</td></tr>
+              <tr><td class="py-2 pr-8"><kbd>Ctrl+Shift+3</kbd></td><td class="py-2">Toggle slash notation</td></tr>
+            </tbody>
+          </table>
+        </div>
         <h3 class="text-lg font-semibold mt-8 mb-3">UI</h3>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <tbody class="text-[var(--color-text-muted)]">
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+P</kbd></td><td class="py-2">Command Palette</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+,</kbd></td><td class="py-2">Settings</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+B</kbd></td><td class="py-2">Toggle left sidebar</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+B</kbd></td><td class="py-2">Toggle right sidebar</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+P</kbd></td><td class="py-2">Command palette</td></tr>
               <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+E</kbd></td><td class="py-2">Toggle plugins</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+1</kbd></td><td class="py-2">Toggle standard notation</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+2</kbd></td><td class="py-2">Toggle tab notation</td></tr>
-              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+Shift+3</kbd></td><td class="py-2">Toggle slash notation</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Shift+?</kbd></td><td class="py-2">Keyboard shortcuts</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+=</kbd></td><td class="py-2">Zoom in</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+-</kbd></td><td class="py-2">Zoom out</td></tr>
+              <tr class="border-b border-[var(--color-border)]"><td class="py-2 pr-8"><kbd>Ctrl+0</kbd></td><td class="py-2">Reset zoom</td></tr>
               <tr><td class="py-2 pr-8"><kbd>Ctrl+Shift+A</kbd></td><td class="py-2">Toggle AI Chat</td></tr>
             </tbody>
           </table>
         </div>
+        <!-- AUTOGEN:SHORTCUTS END -->
       </article>
 
+      <!-- Feedback on this guide -->
+      <div class="mt-16 p-6 rounded-2xl border border-[var(--color-border)] text-center">
+        <p class="text-sm text-[var(--color-text-muted)]">
+          Spot something missing or wrong in this guide?
+          <a href="mailto:feedback@nubium.app?subject=Help%20guide%20feedback" class="text-[var(--color-accent)] hover:underline">Let us know</a>.
+        </p>
+      </div>
+
       <!-- Contribute -->
-      <div class="mt-16 p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-center">
+      <div class="mt-6 p-8 rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-subtle)] text-center">
         <h2 class="text-xl font-bold">Want to help build Nubium?</h2>
         <p class="mt-2 text-[var(--color-text-muted)]">
           Nubium is open source and welcomes contributions &mdash; from bug fixes to new <a href="https://github.com/nth-chile/nubium-plugins" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:underline">plugins</a>.
