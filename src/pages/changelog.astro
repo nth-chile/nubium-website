@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+---
+
+<Layout title="Changelog — Nubium" description="What's new in Nubium. Updated with each release.">
+  <Nav />
+
+  <section class="pt-32 pb-20 px-6">
+    <div class="mx-auto max-w-3xl">
+      <div class="text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Changelog</h1>
+        <p class="mt-4 text-[var(--color-text-muted)] text-lg max-w-xl mx-auto">
+          Recent changes to Nubium. Newest first.
+        </p>
+      </div>
+
+      <div id="loading" class="mt-16 text-center text-[var(--color-text-muted)]">
+        Loading changelog…
+      </div>
+
+      <div id="error" class="mt-16 text-center hidden">
+        <p class="text-[var(--color-text-muted)]">
+          Couldn't load changelog.
+          <a href="https://github.com/nth-chile/nubium/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer" class="text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] no-underline">View on GitHub →</a>
+        </p>
+      </div>
+
+      <div id="changelog" class="mt-16 space-y-10 hidden"></div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const SOURCE = 'https://raw.githubusercontent.com/nth-chile/nubium/main/CHANGELOG.md';
+
+  interface Section {
+    heading: string;
+    items: string[];
+  }
+
+  function parseChangelog(md: string): Section[] {
+    const sections: Section[] = [];
+    let current: Section | null = null;
+    for (const line of md.split('\n')) {
+      const h = line.match(/^##\s+(.+)$/);
+      if (h) {
+        if (current) sections.push(current);
+        current = { heading: h[1].trim(), items: [] };
+      } else if (current) {
+        const item = line.match(/^-\s+(.+)$/);
+        if (item) current.items.push(item[1].trim());
+      }
+    }
+    if (current) sections.push(current);
+    return sections;
+  }
+
+  function renderSection(s: Section): HTMLElement {
+    const wrap = document.createElement('section');
+
+    const h = document.createElement('h2');
+    h.className = 'text-xl font-semibold tracking-tight mb-3';
+    h.textContent = s.heading;
+    wrap.appendChild(h);
+
+    const ul = document.createElement('ul');
+    ul.className = 'space-y-2 list-disc pl-5 text-[var(--color-text-muted)]';
+    for (const item of s.items) {
+      const li = document.createElement('li');
+      li.textContent = item;
+      ul.appendChild(li);
+    }
+    wrap.appendChild(ul);
+
+    return wrap;
+  }
+
+  async function loadChangelog() {
+    const loadingEl = document.getElementById('loading')!;
+    const errorEl = document.getElementById('error')!;
+    const listEl = document.getElementById('changelog')!;
+
+    try {
+      const res = await fetch(SOURCE, { cache: 'no-cache' });
+      if (!res.ok) throw new Error('fetch failed');
+      const md = await res.text();
+      const sections = parseChangelog(md).filter((s) => s.items.length > 0);
+
+      loadingEl.classList.add('hidden');
+      listEl.classList.remove('hidden');
+
+      for (const section of sections) {
+        listEl.appendChild(renderSection(section));
+      }
+    } catch {
+      loadingEl.classList.add('hidden');
+      errorEl.classList.remove('hidden');
+    }
+  }
+
+  loadChangelog();
+</script>
